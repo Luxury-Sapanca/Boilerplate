@@ -19,8 +19,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Core\Insurance.Data\Boilerplate.Data.csproj" />
-    <ProjectReference Include="..\..\Core\Insurance.Service\Boilerplate.Service.csproj" />
+    <ProjectReference Include="..\..\Core\Boilerplate.Data\Boilerplate.Data.csproj" />
+    <ProjectReference Include="..\..\Core\Boilerplate.Service\Boilerplate.Service.csproj" />
   </ItemGroup>
 
 </Project>
