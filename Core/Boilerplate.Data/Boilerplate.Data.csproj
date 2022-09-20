@@ -20,7 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Insurance.Domain\Boilerplate.Domain.csproj" />
+    <ProjectReference Include="..\Boilerplate.Domain\Boilerplate.Domain.csproj" />
   </ItemGroup>
 
 </Project>
