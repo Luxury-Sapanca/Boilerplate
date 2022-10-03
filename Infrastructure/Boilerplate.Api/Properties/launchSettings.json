@@ -17,7 +17,7 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-    "Insurance.Api": {
+    "Boilerplate.Api": {
       "commandName": "Project",
       "launchBrowser": true,
       "launchUrl": "swagger",
