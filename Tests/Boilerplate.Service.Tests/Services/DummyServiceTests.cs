@@ -1,11 +1,4 @@
-﻿using Boilerplate.Data.Repository;
-using Boilerplate.Domain.Entities;
-using Boilerplate.Domain.Exceptions;
-using Boilerplate.Domain.Requests.Dummy;
-using Boilerplate.Domain.Responses.Dummy;
-using Boilerplate.Service.Services;
-
-namespace Boilerplate.Service.Tests.Services;
+﻿namespace Boilerplate.Service.Tests.Services;
 
 public class DummyServiceTests
 {

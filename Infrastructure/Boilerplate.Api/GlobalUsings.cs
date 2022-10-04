@@ -1,6 +1,33 @@
 // Global using directives
 
-global using System.Collections.Generic;
-global using System.Threading.Tasks;
+global using Boilerplate.Api.Middlewares;
+global using Boilerplate.Data;
+global using Boilerplate.Data.Repository;
+global using Boilerplate.Domain.Configurations;
+global using Boilerplate.Domain.Exceptions;
+global using Boilerplate.Domain.Requests.Dummy;
+global using Boilerplate.Domain.Responses.Dummy;
+global using Boilerplate.Service.Interfaces;
+global using Boilerplate.Service.Services;
+global using Microsoft.AspNetCore.Authentication;
+global using Microsoft.AspNetCore.Authentication.JwtBearer;
+global using Microsoft.AspNetCore.Authorization;
+global using Microsoft.AspNetCore.Builder;
+global using Microsoft.AspNetCore.Hosting;
 global using Microsoft.AspNetCore.Http;
 global using Microsoft.AspNetCore.Mvc;
+global using Microsoft.EntityFrameworkCore;
+global using Microsoft.Extensions.Configuration;
+global using Microsoft.Extensions.DependencyInjection;
+global using Microsoft.Extensions.Hosting;
+global using Microsoft.Extensions.Logging;
+global using Microsoft.Extensions.Options;
+global using Newtonsoft.Json;
+global using System;
+global using System.Collections.Generic;
+global using System.IdentityModel.Tokens.Jwt;
+global using System.Net;
+global using System.Net.Http.Headers;
+global using System.Security.Claims;
+global using System.Text.Encodings.Web;
+global using System.Threading.Tasks;

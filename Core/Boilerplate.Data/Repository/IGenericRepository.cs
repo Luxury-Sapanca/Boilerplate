@@ -1,6 +1,4 @@
-﻿using Boilerplate.Domain.Entities;
-
-namespace Boilerplate.Data.Repository;
+﻿namespace Boilerplate.Data.Repository;
 
 public interface IGenericRepository<T> where T : BaseEntity
 {

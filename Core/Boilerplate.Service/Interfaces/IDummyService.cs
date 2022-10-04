@@ -1,7 +1,4 @@
-﻿using Boilerplate.Domain.Requests.Dummy;
-using Boilerplate.Domain.Responses.Dummy;
-
-namespace Boilerplate.Service.Interfaces;
+﻿namespace Boilerplate.Service.Interfaces;
 
 public interface IDummyService
 {

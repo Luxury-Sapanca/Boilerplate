@@ -1,8 +1,4 @@
-﻿using Boilerplate.Domain.Entities;
-using Boilerplate.Domain.Requests.Dummy;
-using Boilerplate.Domain.Responses.Dummy;
-
-namespace Boilerplate.Domain.Mappings;
+﻿namespace Boilerplate.Domain.Mappings;
 
 public class AutoMapperProfile : Profile
 {

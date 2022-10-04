@@ -1,10 +1,4 @@
-﻿using Boilerplate.Domain.Exceptions;
-using Microsoft.Extensions.Logging;
-using Newtonsoft.Json;
-using System;
-using System.Net;
-
-namespace Boilerplate.Api.Middlewares;
+﻿namespace Boilerplate.Api.Middlewares;
 
 public class ExceptionMiddleware
 {

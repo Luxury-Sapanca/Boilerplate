@@ -1,6 +1,4 @@
-﻿using Boilerplate.Domain.Entities;
-
-namespace Boilerplate.Data;
+﻿namespace Boilerplate.Data;
 
 public class DataContext : DbContext
 {

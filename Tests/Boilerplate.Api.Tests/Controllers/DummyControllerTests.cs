@@ -1,9 +1,4 @@
-﻿using Boilerplate.Api.Controllers;
-using Boilerplate.Domain.Requests.Dummy;
-using Boilerplate.Domain.Responses.Dummy;
-using Boilerplate.Service.Interfaces;
-
-namespace Boilerplate.Api.Tests.Controllers;
+﻿namespace Boilerplate.Api.Tests.Controllers;
 
 public class DummyControllerTests
 {

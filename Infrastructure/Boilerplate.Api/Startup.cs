@@ -1,16 +1,3 @@
-using Boilerplate.Api.Middlewares;
-using Boilerplate.Data;
-using Boilerplate.Data.Repository;
-using Boilerplate.Service.Interfaces;
-using Boilerplate.Service.Services;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using System;
-
 namespace Boilerplate.Api;
 
 public class Startup
@@ -25,6 +12,11 @@ public class Startup
     // This method gets called by the runtime. Use this method to add services to the container.
     public void ConfigureServices(IServiceCollection services)
     {
+        services.AddOptions<AuthenticationConfiguration>(AuthenticationConfiguration.AuthenticationScheme)
+            .Bind(Configuration.GetSection(nameof(AuthenticationConfiguration)))
+            .ValidateDataAnnotations()
+            .ValidateOnStart();
+
         services.AddDbContext<DataContext>(options =>
             options.UseSqlite(Configuration.GetSection("ConnectionStrings:DummyDb").Value)
         );

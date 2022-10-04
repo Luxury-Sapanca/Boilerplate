@@ -1,7 +1,4 @@
-﻿using Boilerplate.Api.Middlewares;
-using Boilerplate.Domain.Exceptions;
-
-namespace Boilerplate.Api.Tests.Middlewares;
+﻿namespace Boilerplate.Api.Tests.Middlewares;
 
 public class ExceptionMiddlewareTests
 {
