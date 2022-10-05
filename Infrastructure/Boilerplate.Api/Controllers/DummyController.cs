@@ -5,10 +5,12 @@
 public class DummyController : Controller
 {
     private readonly IDummyService _dummyService;
+    private readonly IMapper _mapper;
 
-    public DummyController(IDummyService dummyService)
+    public DummyController(IDummyService dummyService, IMapper mapper)
     {
         _dummyService = dummyService;
+        _mapper = mapper;
     }
 
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<GetDummyResponse>))]
@@ -19,7 +21,7 @@ public class DummyController : Controller
     {
         var result = await _dummyService.GetAllAsync();
 
-        return StatusCode(StatusCodes.Status200OK, result);
+        return StatusCode(StatusCodes.Status200OK, _mapper.Map<List<GetDummyResponse>>(result));
     }
 
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(GetDummyResponse))]
@@ -30,7 +32,7 @@ public class DummyController : Controller
     {
         var result = await _dummyService.GetAsync(id);
 
-        return StatusCode(StatusCodes.Status200OK, result);
+        return StatusCode(StatusCodes.Status200OK, _mapper.Map<GetDummyResponse>(result));
     }
 
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(CreateDummyResponse))]
@@ -39,9 +41,10 @@ public class DummyController : Controller
     [HttpPost]
     public async Task<ActionResult<CreateDummyResponse>> PostAsync([FromBody] CreateDummyRequest createDummyRequest)
     {
-        var result = await _dummyService.PostAsync(createDummyRequest);
+        var dummyDto = _mapper.Map<DummyDto>(createDummyRequest);
+        var result = await _dummyService.PostAsync(dummyDto);
 
-        return StatusCode(StatusCodes.Status201Created, result);
+        return StatusCode(StatusCodes.Status201Created, _mapper.Map<CreateDummyResponse>(result));
     }
 
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(UpdateDummyResponse))]
@@ -50,9 +53,10 @@ public class DummyController : Controller
     [HttpPut]
     public async Task<ActionResult<UpdateDummyResponse>> PutAsync([FromBody] UpdateDummyRequest updateDummyRequest)
     {
-        var result = await _dummyService.PutAsync(updateDummyRequest);
+        var dummyDto = _mapper.Map<DummyDto>(updateDummyRequest);
+        var result = await _dummyService.PutAsync(dummyDto);
 
-        return StatusCode(StatusCodes.Status200OK, result);
+        return StatusCode(StatusCodes.Status200OK, _mapper.Map<UpdateDummyResponse>(result));
     }
 
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(bool))]

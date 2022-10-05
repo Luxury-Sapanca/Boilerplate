@@ -3,8 +3,6 @@
 global using Boilerplate.Api.Controllers;
 global using Boilerplate.Api.Middlewares;
 global using Boilerplate.Domain.Exceptions;
-global using Boilerplate.Domain.Requests.Dummy;
-global using Boilerplate.Domain.Responses.Dummy;
 global using Boilerplate.Service.Interfaces;
 global using Microsoft.AspNetCore.Http;
 global using Microsoft.AspNetCore.Mvc;

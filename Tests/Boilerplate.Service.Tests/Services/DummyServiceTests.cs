@@ -22,13 +22,13 @@ public class DummyServiceTests
             new() { Id = 1, Name = "Test" },
             new() { Id = 1, Name = "Test2" }
         };
-        var mockDummiesResponse = new List<GetDummyResponse>
+        var mockDummiesResponse = new List<DummyDto>
         {
             new() { Id = 1, Name = "Test" },
             new() { Id = 1, Name = "Test2" }
         };
         _mockSurchargeRepository.Setup(s => s.GetAllAsync()).ReturnsAsync(mockDummies);
-        _mockMapper.Setup(m => m.Map<List<GetDummyResponse>>(It.IsAny<List<Dummy>>())).Returns(mockDummiesResponse);
+        _mockMapper.Setup(m => m.Map<List<DummyDto>>(It.IsAny<List<Dummy>>())).Returns(mockDummiesResponse);
 
         //Act
         var result = await _dummyService.GetAllAsync();
@@ -47,19 +47,19 @@ public class DummyServiceTests
             Id = 1,
             Name = "Test"
         };
-        var mockDummyResponse = new GetDummyResponse
+        var mockDummyDto = new DummyDto
         {
             Id = 1,
             Name = "Test"
         };
         _mockSurchargeRepository.Setup(s => s.GetAsync(It.IsAny<int>())).ReturnsAsync(mockDummy);
-        _mockMapper.Setup(m => m.Map<GetDummyResponse>(It.IsAny<Dummy>())).Returns(mockDummyResponse);
+        _mockMapper.Setup(m => m.Map<DummyDto>(It.IsAny<Dummy>())).Returns(mockDummyDto);
 
         //Act
         var result = await _dummyService.GetAsync(1);
 
         //Assert
-        Assert.Equal(expected: result, actual: mockDummyResponse);
+        Assert.Equal(expected: result, actual: mockDummyDto);
         _mockSurchargeRepository.VerifyAll();
     }
 
@@ -67,8 +67,9 @@ public class DummyServiceTests
     public async Task Dummy_PostAsync_WithGivenCreateDummyRequest_ShouldReturnCreateDummyResponse()
     {
         //Arrange
-        var mockCreateDummyRequest = new CreateDummyRequest
+        var mockDummyDto = new DummyDto
         {
+            Id = 1,
             Name = "Test"
         };
         var mockDummy = new Dummy
@@ -76,19 +77,14 @@ public class DummyServiceTests
             Id = 1,
             Name = "Test"
         };
-        var mockCreateDummyResponse = new CreateDummyResponse
-        {
-            Id = 1,
-            Name = "Test"
-        };
         _mockSurchargeRepository.Setup(s => s.AddAsync(It.IsAny<Dummy>())).ReturnsAsync(mockDummy);
-        _mockMapper.Setup(m => m.Map<CreateDummyResponse>(It.IsAny<Dummy>())).Returns(mockCreateDummyResponse);
+        _mockMapper.Setup(m => m.Map<DummyDto>(It.IsAny<Dummy>())).Returns(mockDummyDto);
 
         //Act
-        var result = await _dummyService.PostAsync(mockCreateDummyRequest);
+        var result = await _dummyService.PostAsync(mockDummyDto);
 
         //Assert
-        Assert.Equal(expected: result, actual: mockCreateDummyResponse);
+        Assert.Equal(expected: result, actual: mockDummyDto);
         _mockSurchargeRepository.VerifyAll();
     }
 
@@ -96,7 +92,7 @@ public class DummyServiceTests
     public async Task Dummy_PostAsync_WithGivenCreateDummyRequest_ShouldThrowExistingRecordException_IfRecordExists()
     {
         //Arrange
-        var mockCreateDummyRequest = new CreateDummyRequest
+        var mockDummyDto = new DummyDto
         {
             Name = "Test"
         };
@@ -105,10 +101,10 @@ public class DummyServiceTests
             Id = 1,
             Name = "Test"
         };
-        _mockSurchargeRepository.Setup(s => s.GetAsync(p => p.Name == mockCreateDummyRequest.Name)).ReturnsAsync(mockDummy);
+        _mockSurchargeRepository.Setup(s => s.GetAsync(p => p.Name == mockDummyDto.Name)).ReturnsAsync(mockDummy);
 
         //Act
-        Task Result() => _dummyService.PostAsync(mockCreateDummyRequest);
+        Task Result() => _dummyService.PostAsync(mockDummyDto);
 
         //Assert
         var exception = await Assert.ThrowsAsync<DummyException>(Result);
@@ -120,7 +116,7 @@ public class DummyServiceTests
     public async Task Dummy_PutAsync_WithGivenUpdateDummyRequest_ShouldReturnCreateDummyResponse()
     {
         //Arrange
-        var mockUpdateDummyRequest = new UpdateDummyRequest
+        var mockDummyDto = new DummyDto
         {
             Id = 1,
             Name = "Test"
@@ -130,20 +126,15 @@ public class DummyServiceTests
             Id = 1,
             Name = "Test"
         };
-        var mockUpdateDummyResponse = new UpdateDummyResponse
-        {
-            Id = 1,
-            Name = "Test"
-        };
         _mockSurchargeRepository.Setup(s => s.GetAsync(It.IsAny<int>())).ReturnsAsync(mockDummy);
         _mockSurchargeRepository.Setup(s => s.UpdateAsync(It.IsAny<Dummy>())).ReturnsAsync(mockDummy);
-        _mockMapper.Setup(m => m.Map<UpdateDummyResponse>(It.IsAny<Dummy>())).Returns(mockUpdateDummyResponse);
+        _mockMapper.Setup(m => m.Map<DummyDto>(It.IsAny<Dummy>())).Returns(mockDummyDto);
 
         //Act
-        var result = await _dummyService.PutAsync(mockUpdateDummyRequest);
+        var result = await _dummyService.PutAsync(mockDummyDto);
 
         //Assert
-        Assert.Equal(expected: result, actual: mockUpdateDummyResponse);
+        Assert.Equal(expected: result, actual: mockDummyDto);
         _mockSurchargeRepository.VerifyAll();
     }
 
@@ -151,15 +142,15 @@ public class DummyServiceTests
     public async Task Dummy_PutAsync_WithGivenUpdateDummyRequest_ShouldThrowRecordNotFoundException_IfRecordDoesNotExist()
     {
         //Arrange
-        var mockUpdateDummyRequest = new UpdateDummyRequest
+        var mockDummyDto = new DummyDto
         {
             Id = 1,
             Name = "Test"
         };
-        _mockSurchargeRepository.Setup(s => s.GetAsync(mockUpdateDummyRequest.Id)).ReturnsAsync((Dummy)null);
+        _mockSurchargeRepository.Setup(s => s.GetAsync(mockDummyDto.Id)).ReturnsAsync((Dummy)null);
 
         //Act
-        Task Result() => _dummyService.PutAsync(mockUpdateDummyRequest);
+        Task Result() => _dummyService.PutAsync(mockDummyDto);
 
         //Assert
         var exception = await Assert.ThrowsAsync<DummyException>(Result);

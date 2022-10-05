@@ -2,13 +2,13 @@
 
 public interface IDummyService
 {
-    Task<List<GetDummyResponse>> GetAllAsync();
+    Task<List<DummyDto>> GetAllAsync();
 
-    Task<GetDummyResponse> GetAsync(int id);
+    Task<DummyDto> GetAsync(int id);
 
-    Task<CreateDummyResponse> PostAsync(CreateDummyRequest createDummyRequest);
+    Task<DummyDto> PostAsync(DummyDto dummyDto);
 
-    Task<UpdateDummyResponse> PutAsync(UpdateDummyRequest updateDummyRequest);
+    Task<DummyDto> PutAsync(DummyDto dummyDto);
 
     Task DeleteAsync(int id);
 }

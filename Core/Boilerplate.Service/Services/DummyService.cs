@@ -11,47 +11,47 @@ public class DummyService : IDummyService
         _mapper = mapper;
     }
 
-    public async Task<List<GetDummyResponse>> GetAllAsync()
+    public async Task<List<DummyDto>> GetAllAsync()
     {
         var dummies = await _dummyRepository.GetAllAsync();
 
-        return _mapper.Map<List<GetDummyResponse>>(dummies);
+        return _mapper.Map<List<DummyDto>>(dummies);
     }
 
-    public async Task<GetDummyResponse> GetAsync(int id)
+    public async Task<DummyDto> GetAsync(int id)
     {
         var dummy = await _dummyRepository.GetAsync(id);
 
-        return _mapper.Map<GetDummyResponse>(dummy);
+        return _mapper.Map<DummyDto>(dummy);
     }
 
-    public async Task<CreateDummyResponse> PostAsync(CreateDummyRequest createDummyRequest)
+    public async Task<DummyDto> PostAsync(DummyDto dummyDto)
     {
-        var existingDummy = await _dummyRepository.GetAsync(s => s.Name == createDummyRequest.Name);
+        var existingDummy = await _dummyRepository.GetAsync(s => s.Name == dummyDto.Name);
 
         if (existingDummy != null)
         {
-            throw new DummyException($"There is a dummy. Name: '{createDummyRequest.Name}'");
+            throw new DummyException($"There is a dummy. Name: '{dummyDto.Name}'");
         }
 
-        var dummy = await _dummyRepository.AddAsync(_mapper.Map<Dummy>(createDummyRequest));
+        var dummy = await _dummyRepository.AddAsync(_mapper.Map<Dummy>(dummyDto));
 
-        return _mapper.Map<CreateDummyResponse>(dummy);
+        return _mapper.Map<DummyDto>(dummy);
     }
 
-    public async Task<UpdateDummyResponse> PutAsync(UpdateDummyRequest updateDummyRequest)
+    public async Task<DummyDto> PutAsync(DummyDto dummyDto)
     {
-        var existingDummy = await _dummyRepository.GetAsync(updateDummyRequest.Id);
+        var existingDummy = await _dummyRepository.GetAsync(dummyDto.Id);
 
         if (existingDummy == null)
         {
-            throw new DummyException($"Dummy is not found while updating. DummyId: '{updateDummyRequest.Id}'");
+            throw new DummyException($"Dummy is not found while updating. DummyId: '{dummyDto.Id}'");
         }
 
-        existingDummy = _mapper.Map<Dummy>(updateDummyRequest);
+        existingDummy = _mapper.Map<Dummy>(dummyDto);
         var updatedDummy = await _dummyRepository.UpdateAsync(existingDummy);
 
-        return _mapper.Map<UpdateDummyResponse>(updatedDummy);
+        return _mapper.Map<DummyDto>(updatedDummy);
     }
 
     public async Task DeleteAsync(int id)

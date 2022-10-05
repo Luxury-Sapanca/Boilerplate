@@ -7,9 +7,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Boilerplate.Api", "Infrastr
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{688513B6-F847-4834-8770-21037905B973}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{BB105F89-C615-413D-8489-0774AD0BCAD7}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Libraries", "Libraries", "{BB105F89-C615-413D-8489-0774AD0BCAD7}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{04C3FBED-61AC-4F02-8DE4-AA393A51B08E}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentation", "{04C3FBED-61AC-4F02-8DE4-AA393A51B08E}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Boilerplate.Domain", "Core\Boilerplate.Domain\Boilerplate.Domain.csproj", "{2C77D7CE-EAB8-4295-8ECD-C65B6C0CFBFB}"
 EndProject

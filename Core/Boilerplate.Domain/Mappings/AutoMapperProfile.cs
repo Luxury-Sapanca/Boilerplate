@@ -4,10 +4,6 @@ public class AutoMapperProfile : Profile
 {
     public AutoMapperProfile()
     {
-        CreateMap<Dummy, GetDummyResponse>().ReverseMap();
-        CreateMap<Dummy, CreateDummyRequest>().ReverseMap();
-        CreateMap<Dummy, CreateDummyResponse>().ReverseMap();
-        CreateMap<Dummy, UpdateDummyRequest>().ReverseMap();
-        CreateMap<Dummy, UpdateDummyResponse>().ReverseMap();
+        CreateMap<Dummy, DummyDto>().ReverseMap();
     }
 }

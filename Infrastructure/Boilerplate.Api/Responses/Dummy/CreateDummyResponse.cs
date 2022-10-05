@@ -1,4 +1,4 @@
-﻿namespace Boilerplate.Domain.Responses.Dummy;
+﻿namespace Boilerplate.Api.Responses.Dummy;
 
 public class CreateDummyResponse
 {

@@ -1,4 +1,4 @@
-﻿namespace Boilerplate.Domain.Requests.Dummy;
+﻿namespace Boilerplate.Api.Requests.Dummy;
 
 public class CreateDummyRequest
 {

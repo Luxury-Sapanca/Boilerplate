@@ -32,7 +32,6 @@ public class GenericRepository<T> : IGenericRepository<T> where T : BaseEntity
     public async Task<T> AddAsync(T entity)
     {
         await Context.Set<T>().AddAsync(entity);
-        Context.Entry(entity).State = EntityState.Added;
         await SaveChangesAsync();
 
         return entity;
@@ -41,7 +40,6 @@ public class GenericRepository<T> : IGenericRepository<T> where T : BaseEntity
     public async Task DeleteAsync(T entity)
     {
         Context.Set<T>().Remove(entity);
-        Context.Entry(entity).State = EntityState.Deleted;
 
         await SaveChangesAsync();
     }

@@ -1,26 +1,40 @@
-﻿namespace Boilerplate.Api.Tests.Controllers;
+﻿using AutoMapper;
+using Boilerplate.Api.Requests.Dummy;
+using Boilerplate.Api.Responses.Dummy;
+using Boilerplate.Domain.DTOs;
+using Boilerplate.Domain.Entities;
+
+namespace Boilerplate.Api.Tests.Controllers;
 
 public class DummyControllerTests
 {
     private readonly Mock<IDummyService> _mockDummyService;
+    private readonly Mock<IMapper> _mockMapper;
     private readonly DummyController _sut;
 
     public DummyControllerTests()
     {
         _mockDummyService = new Mock<IDummyService>();
-        _sut = new DummyController(_mockDummyService.Object);
+        _mockMapper = new Mock<IMapper>();
+        _sut = new DummyController(_mockDummyService.Object, _mockMapper.Object);
     }
 
     [Fact]
     public async Task Dummy_GetAsync_ShouldReturnAllDummies()
     {
         //Arrange
+        var mockDummyDtos = new List<DummyDto>
+        {
+            new() { Id = 1, Name = "Test" },
+            new() { Id = 2, Name = "Test2" }
+        };
         var mockGetDummiesResponse = new List<GetDummyResponse>
         {
             new() { Id = 1, Name = "Test" },
             new() { Id = 2, Name = "Test2" }
         };
-        _mockDummyService.Setup(s => s.GetAllAsync()).ReturnsAsync(mockGetDummiesResponse);
+        _mockDummyService.Setup(s => s.GetAllAsync()).ReturnsAsync(mockDummyDtos);
+        _mockMapper.Setup(m => m.Map<List<GetDummyResponse>>(mockDummyDtos)).Returns(mockGetDummiesResponse);
 
         //Act
         var result = await _sut.GetAsync();
@@ -36,12 +50,18 @@ public class DummyControllerTests
     public async Task Dummy_GetAsync_WithGivenId_ShouldReturnAllDummy()
     {
         //Arrange
-        var mockDummyResponse = new GetDummyResponse
+        var mockDummyDto = new DummyDto
         {
             Id = 1,
             Name = "Test"
         };
-        _mockDummyService.Setup(s => s.GetAsync(It.IsAny<int>())).ReturnsAsync(mockDummyResponse);
+        var mockGetDummyResponse = new GetDummyResponse
+        {
+            Id = 1,
+            Name = "Test"
+        };
+        _mockDummyService.Setup(s => s.GetAsync(It.IsAny<int>())).ReturnsAsync(mockDummyDto);
+        _mockMapper.Setup(m => m.Map<GetDummyResponse>(mockDummyDto)).Returns(mockGetDummyResponse);
 
         //Act
         var result = await _sut.GetAsync(1);
@@ -49,7 +69,7 @@ public class DummyControllerTests
 
         //Assert
         Assert.IsType<ObjectResult>(result.Result);
-        Assert.Equal(expected: mockDummyResponse, actual: resultObject!.Value);
+        Assert.Equal(expected: mockGetDummyResponse, actual: resultObject!.Value);
         _mockDummyService.VerifyAll();
     }
 
@@ -61,12 +81,20 @@ public class DummyControllerTests
         {
             Name = "Test"
         };
+        var mockDummyDto = new DummyDto
+        {
+            Id = 1,
+            Name = "Test"
+        };
         var mockCreateDummyResponse = new CreateDummyResponse
         {
             Id = 1,
             Name = "Test"
         };
-        _mockDummyService.Setup(s => s.PostAsync(It.IsAny<CreateDummyRequest>())).ReturnsAsync(mockCreateDummyResponse);
+        _mockDummyService.Setup(s => s.PostAsync(It.IsAny<DummyDto>())).ReturnsAsync(mockDummyDto);
+        _mockMapper.Setup(m => m.Map<DummyDto>(mockCreateDummyRequest)).Returns(mockDummyDto);
+        _mockMapper.Setup(m => m.Map<CreateDummyResponse>(mockDummyDto)).Returns(mockCreateDummyResponse);
+
 
         //Act
         var result = await _sut.PostAsync(mockCreateDummyRequest);
@@ -89,10 +117,17 @@ public class DummyControllerTests
         };
         var mockUpdateDummyResponse = new UpdateDummyResponse
         {
-            Id = 2,
+            Id = 1,
             Name = "Test2"
         };
-        _mockDummyService.Setup(s => s.PutAsync(It.IsAny<UpdateDummyRequest>())).ReturnsAsync(mockUpdateDummyResponse);
+        var mockDummyDto = new DummyDto
+        {
+            Id = 1,
+            Name = "Test2"
+        };
+        _mockDummyService.Setup(s => s.PutAsync(It.IsAny<DummyDto>())).ReturnsAsync(mockDummyDto);
+        _mockMapper.Setup(m => m.Map<DummyDto>(mockUpdateDummyRequest)).Returns(mockDummyDto);
+        _mockMapper.Setup(m => m.Map<UpdateDummyResponse>(mockDummyDto)).Returns(mockUpdateDummyResponse);
 
         //Act
         var result = await _sut.PutAsync(mockUpdateDummyRequest);
