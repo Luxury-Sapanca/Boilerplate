@@ -22,8 +22,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Core\Boilerplate.Service\Boilerplate.Service.csproj" />
-    <ProjectReference Include="..\..\Infrastructure\Boilerplate.Api\Boilerplate.Api.csproj" />
+    <ProjectReference Include="..\..\Libraries\Boilerplate.Domain\Boilerplate.Domain.csproj" />
+    <ProjectReference Include="..\..\Libraries\Boilerplate.Service\Boilerplate.Service.csproj" />
+    <ProjectReference Include="..\..\Presentation\Boilerplate.Api\Boilerplate.Api.csproj" />
   </ItemGroup>
 
 </Project>

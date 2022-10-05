@@ -1,10 +1,4 @@
-﻿using AutoMapper;
-using Boilerplate.Api.Requests.Dummy;
-using Boilerplate.Api.Responses.Dummy;
-using Boilerplate.Domain.DTOs;
-using Boilerplate.Domain.Entities;
-
-namespace Boilerplate.Api.Tests.Controllers;
+﻿namespace Boilerplate.Api.Tests.Controllers;
 
 public class DummyControllerTests
 {
@@ -23,7 +17,7 @@ public class DummyControllerTests
     public async Task Dummy_GetAsync_ShouldReturnAllDummies()
     {
         //Arrange
-        var mockDummyDtos = new List<DummyDto>
+        var mockDummyDto = new List<DummyDto>
         {
             new() { Id = 1, Name = "Test" },
             new() { Id = 2, Name = "Test2" }
@@ -33,8 +27,8 @@ public class DummyControllerTests
             new() { Id = 1, Name = "Test" },
             new() { Id = 2, Name = "Test2" }
         };
-        _mockDummyService.Setup(s => s.GetAllAsync()).ReturnsAsync(mockDummyDtos);
-        _mockMapper.Setup(m => m.Map<List<GetDummyResponse>>(mockDummyDtos)).Returns(mockGetDummiesResponse);
+        _mockDummyService.Setup(s => s.GetAllAsync()).ReturnsAsync(mockDummyDto);
+        _mockMapper.Setup(m => m.Map<List<GetDummyResponse>>(mockDummyDto)).Returns(mockGetDummiesResponse);
 
         //Act
         var result = await _sut.GetAsync();
