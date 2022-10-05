@@ -13,10 +13,6 @@
 [![Build](https://github.com/Luxury-Sapanca/Boilerplate/actions/workflows/build.yml/badge.svg)](https://github.com/Luxury-Sapanca/Boilerplate/actions/workflows/build.yml)
 
 
-
-
-
-
 ### Table of Contents
   
 <ol>

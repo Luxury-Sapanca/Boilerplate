@@ -23,8 +23,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Boilerplate.Service.Tests",
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Scripts", "Scripts", "{97E62C57-FBB5-4513-98C7-8017ACB367FB}"
 	ProjectSection(SolutionItems) = preProject
-		Add-Migrations.ps1 = Add-Migrations.ps1
-		Apply-Migrations.ps1 = Apply-Migrations.ps1
+		Scripts\Add-Migrations.ps1 = Scripts\Add-Migrations.ps1
+		Scripts\Apply-Migrations.ps1 = Scripts\Apply-Migrations.ps1
 	EndProjectSection
 EndProject
 Global
