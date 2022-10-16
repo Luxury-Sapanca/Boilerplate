@@ -35,7 +35,7 @@ public class DummyController : Controller
         return StatusCode(StatusCodes.Status200OK, _mapper.Map<GetDummyResponse>(result));
     }
 
-    [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(CreateDummyResponse))]
+    [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(CreateDummyResponse))]
     [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(CreateDummyResponse))]
     [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(CreateDummyResponse))]
     [HttpPost]
