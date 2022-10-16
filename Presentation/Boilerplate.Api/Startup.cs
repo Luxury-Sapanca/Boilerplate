@@ -1,3 +1,5 @@
+using IConfigurationProvider = AutoMapper.IConfigurationProvider;
+
 namespace Boilerplate.Api;
 
 public class Startup
@@ -31,10 +33,12 @@ public class Startup
         services.AddSwaggerGen();
     }
 
-    public void Configure(IApplicationBuilder app, IWebHostEnvironment env, DataContext dataContext)
+    public void Configure(IApplicationBuilder app, IWebHostEnvironment env, DataContext dataContext, IConfigurationProvider autoMapperConfiguration)
     {
         if (env.IsDevelopment())
         {
+            autoMapperConfiguration.AssertConfigurationIsValid();
+
             app.UseDeveloperExceptionPage();
         }
 
