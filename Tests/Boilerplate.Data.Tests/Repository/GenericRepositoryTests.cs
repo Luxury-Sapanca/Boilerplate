@@ -7,7 +7,7 @@ public class GenericRepositoryTests : IDisposable
     public GenericRepositoryTests()
     {
         var optionsBuilder = new DbContextOptionsBuilder<DataContext>();
-        optionsBuilder.UseInMemoryDatabase("test");
+        optionsBuilder.UseInMemoryDatabase("TestDatabase");
 
         _dataContext = new DataContext(optionsBuilder.Options);
     }
@@ -21,14 +21,14 @@ public class GenericRepositoryTests : IDisposable
     public async Task GenericRepository_GetAllAsync_ShouldReturnAllDummies()
     {
         //Arrange
-        var data = new List<Dummy>
+        var mockDummies = new List<Dummy>
         {
-            new() { Id = 1, Name = "AAA" },
-            new() { Id = 2, Name = "BBB" },
-            new() { Id = 3, Name = "CCC" },
+            new() { Id = 1, Name = "TestName1" },
+            new() { Id = 2, Name = "TestName2" },
+            new() { Id = 3, Name = "TestName3" },
         };
 
-        _dataContext.Dummies.AddRange(data);
+        _dataContext.Dummies.AddRange(mockDummies);
         await _dataContext.SaveChangesAsync();
 
         var repository = new GenericRepository<Dummy>(_dataContext);
@@ -37,24 +37,130 @@ public class GenericRepositoryTests : IDisposable
         var dummies = await repository.GetAllAsync();
 
         //Assert
-        Assert.Equal(data.Count, dummies.Count);
+        Assert.Equal(mockDummies.Count, dummies.Count);
     }
 
     [Fact]
     public async Task GenericRepository_GetAsync_ShouldReturnDummy()
     {
         //Arrange
-        var data = new Dummy { Id = 1, Name = "AAA" };
-        _dataContext.Dummies.Add(data);
+        var mockDummy = new Dummy { Id = 1, Name = "TestName1" };
+        _dataContext.Dummies.Add(mockDummy);
         await _dataContext.SaveChangesAsync();
 
         var repository = new GenericRepository<Dummy>(_dataContext);
 
         //Act
-        var dummy = await repository.GetAsync(data.Id);
+        var dummy = await repository.GetAsync(mockDummy.Id);
 
         //Assert
-        Assert.Equal(data.Id, dummy.Id);
-        Assert.Equal(data.Name, dummy.Name);
+        Assert.Equal(mockDummy.Id, dummy.Id);
+        Assert.Equal(mockDummy.Name, dummy.Name);
+    }
+
+    [Fact]
+    public async Task GenericRepository_GetAsync_WithGivenId_ShouldReturnDummy()
+    {
+        //Arrange
+        var mockDummy = new Dummy { Id = 1, Name = "TestName1" };
+        _dataContext.Dummies.Add(mockDummy);
+        await _dataContext.SaveChangesAsync();
+
+        var repository = new GenericRepository<Dummy>(_dataContext);
+
+        //Act
+        var employee = await repository.GetAsync(mockDummy.Id);
+
+        //Assert
+        Assert.Equal(mockDummy.Id, employee.Id);
+        Assert.Equal(mockDummy.Name, employee.Name);
+    }
+
+    [Fact]
+    public async Task GenericRepository_GetAsync_WithGivenExpression_ShouldReturnDummy()
+    {
+        //Arrange
+        var mockDummy = new Dummy { Id = 1, Name = "TestName1" };
+        _dataContext.Dummies.Add(mockDummy);
+        await _dataContext.SaveChangesAsync();
+
+        var repository = new GenericRepository<Dummy>(_dataContext);
+
+        //Act
+        var employee = await repository.GetAsync(e => e.Id == 1);
+
+        //Assert
+        Assert.Equal(mockDummy.Id, employee.Id);
+        Assert.Equal(mockDummy.Name, employee.Name);
+    }
+
+    [Fact]
+    public async Task GenericRepository_FindAsync_WithGivenExpression_ShouldReturnDummy()
+    {
+        //Arrange
+        var mockDummy = new Dummy { Id = 1, Name = "TestName1" };
+        _dataContext.Dummies.Add(mockDummy);
+        await _dataContext.SaveChangesAsync();
+
+        var repository = new GenericRepository<Dummy>(_dataContext);
+
+        //Act
+        var employees = await repository.FindAsync(e => e.Id == 1);
+
+        //Assert
+        Assert.Equal(mockDummy.Id, employees[0].Id);
+        Assert.Equal(mockDummy.Name, employees[0].Name);
+    }
+
+    [Fact]
+    public async Task GenericRepository_AddAsync_WithGivenDummy_ShouldReturnDummy()
+    {
+        //Arrange
+        var mockDummy = new Dummy { Id = 1, Name = "TestName1" };
+        var repository = new GenericRepository<Dummy>(_dataContext);
+
+        //Act
+        var employee = await repository.AddAsync(mockDummy);
+
+        //Assert
+        Assert.Equal(mockDummy.Id, employee.Id);
+        Assert.Equal(mockDummy.Name, employee.Name);
+    }
+
+    [Fact]
+    public async Task GenericRepository_DeleteAsync_WithGivenDummy_ShouldDeleteDummy()
+    {
+        //Arrange
+        var mockDummy = new Dummy { Id = 1, Name = "TestName1" };
+        _dataContext.Dummies.Add(mockDummy);
+        await _dataContext.SaveChangesAsync();
+
+        var repository = new GenericRepository<Dummy>(_dataContext);
+
+        //Act
+        await repository.DeleteAsync(mockDummy);
+        var employee = await repository.GetAsync(mockDummy.Id);
+
+        //Assert
+        Assert.Null(employee);
+    }
+
+    [Fact]
+    public async Task GenericRepository_UpdateAsync_WithGivenDummy_ShouldReturnUpdatedDummy()
+    {
+        //Arrange
+        var mockDummy = new Dummy { Id = 1, Name = "TestName1" };
+        _dataContext.Dummies.Add(mockDummy);
+        await _dataContext.SaveChangesAsync();
+        mockDummy.Name = "BBB";
+
+        var repository = new GenericRepository<Dummy>(_dataContext);
+
+        //Act
+        var employee = await repository.UpdateAsync(mockDummy);
+
+        //Assert
+        Assert.Equal(mockDummy.Id, employee.Id);
+        Assert.Equal(mockDummy.Name, employee.Name);
     }
 }

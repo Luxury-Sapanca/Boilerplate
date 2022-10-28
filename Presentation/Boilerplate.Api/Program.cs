@@ -1,5 +1,6 @@
 namespace Boilerplate.Api;
 
+[ExcludeFromCodeCoverage]
 public class Program
 {
     public static void Main(string[] args)

@@ -1,7 +1,6 @@
-using IConfigurationProvider = AutoMapper.IConfigurationProvider;
-
 namespace Boilerplate.Api;
 
+[ExcludeFromCodeCoverage]
 public class Startup
 {
     public Startup(IConfiguration configuration)
