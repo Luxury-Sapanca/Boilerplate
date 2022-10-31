@@ -1,5 +1,6 @@
 ﻿namespace Boilerplate.Api.Controllers;
 
+[Authorize(Policy = nameof(AuthorizationRequirement))]
 [Route("api/dummy")]
 [ApiController]
 public class DummyController : Controller
