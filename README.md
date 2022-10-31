@@ -147,7 +147,7 @@ As you can see in the beginning of document, the project is integrated to Sonarq
 You can find a couple of advices below in order to make the Insurance API better.
 
 * Adding soft delete feature
-* Adding Serilog to show the logs in console and txt file (maybe Sentry integration)
+* Adding NewRelic (free) to show the logs in console and txt file (maybe Sentry integration)
 * Adding fluent validation
 * Adding mock library to put all mock objects into one place
 * Adding Swagger specifications
