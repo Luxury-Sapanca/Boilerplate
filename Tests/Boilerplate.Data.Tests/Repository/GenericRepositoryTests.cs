@@ -3,6 +3,7 @@
 public class GenericRepositoryTests : IDisposable
 {
     private readonly DataContext _dataContext;
+    private readonly DbConnection _dbConnection;
 
     public GenericRepositoryTests()
     {
@@ -10,6 +11,8 @@ public class GenericRepositoryTests : IDisposable
         optionsBuilder.UseInMemoryDatabase("TestDatabase");
 
         _dataContext = new DataContext(optionsBuilder.Options);
+        _dbConnection = new SqliteConnection("DataSource=:memory:");
+        _dbConnection.Open();
     }
     
     public void Dispose()
@@ -152,7 +155,7 @@ public class GenericRepositoryTests : IDisposable
         var mockDummy = new Dummy { Id = 1, Name = "TestName1" };
         _dataContext.Dummies.Add(mockDummy);
         await _dataContext.SaveChangesAsync();
-        mockDummy.Name = "BBB";
+        mockDummy.Name = "TestName2";
 
         var repository = new GenericRepository<Dummy>(_dataContext);
 
@@ -162,5 +165,34 @@ public class GenericRepositoryTests : IDisposable
         //Assert
         Assert.Equal(mockDummy.Id, employee.Id);
         Assert.Equal(mockDummy.Name, employee.Name);
+    }
+
+    [Fact]
+    public async Task GenericRepository_AddAsync_WithGivenEntity_ThrowsDbUpdateException()
+    {
+        var dbContext = CreateDataContext(_dbConnection, new MockFailCommandInterceptor());
+
+        var repository = new GenericRepository<Dummy>(dbContext);
+        async Task Result() => await repository.AddAsync(new Dummy
+        {
+            Name = "TestName1"
+        });
+
+        await Assert.ThrowsAsync<DbUpdateException>(Result);
+    }
+
+    private static DataContext CreateDataContext(DbConnection connection, params IInterceptor[]? interceptors)
+    {
+        var optionsBuilder = new DbContextOptionsBuilder<DataContext>().UseSqlite(connection);
+
+        if (interceptors != null)
+        {
+            optionsBuilder.AddInterceptors(interceptors);
+        }
+
+        var dbContext = new DataContext(optionsBuilder.Options);
+        dbContext.Database.EnsureCreated();
+
+        return dbContext;
     }
 }

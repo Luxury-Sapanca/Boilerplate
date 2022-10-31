@@ -65,7 +65,7 @@ public class GenericRepository<T> : IGenericRepository<T> where T : BaseEntity
         {
             await Context.SaveChangesAsync();
         }
-        catch (DbUpdateConcurrencyException)
+        catch (DbUpdateException)
         {
             Context.ChangeTracker.Clear();
 

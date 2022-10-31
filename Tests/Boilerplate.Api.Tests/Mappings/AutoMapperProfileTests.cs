@@ -3,7 +3,7 @@
 public class AutoMapperProfileTests
 {
     [Fact]
-    public Task AutoMapper_ValidateMappings_ShouldBeValid()
+    public Task ApiAutoMapper_ValidateMappings_ShouldBeValid()
     {
         var mapperConfig = new MapperConfiguration(cfg =>
         {
