@@ -63,6 +63,6 @@ public class DummyService : IDummyService
             throw new DummyException($"Dummy is not found while deleting. DummyId: '{id}'");
         }
 
-        await _dummyRepository.DeleteAsync(dummy);
+        await _dummyRepository.SoftDeleteAsync(dummy);
     }
 }

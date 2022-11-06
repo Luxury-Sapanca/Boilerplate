@@ -17,7 +17,7 @@ public class Startup
     public void ConfigureServices(IServiceCollection services)
     {
         services.AddOptions<AuthenticationConfiguration>(AuthenticationConfiguration.AuthenticationScheme).Bind(Configuration.GetSection(nameof(AuthenticationConfiguration))).ValidateDataAnnotations().ValidateOnStart();
-        services.AddDbContext<DataContext>(options => options.UseSqlite(Configuration.GetSection("ConnectionStrings:DummyDb").Value));
+        services.AddDbContextPool<DataContext>(options => options.UseSqlite(Configuration.GetSection("ConnectionStrings:DummyDb").Value));
 
         services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 

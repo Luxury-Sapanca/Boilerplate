@@ -1,6 +1,6 @@
 ﻿namespace Boilerplate.Data.Repository;
 
-public class GenericRepository<T> : IGenericRepository<T> where T : BaseEntity
+public class GenericRepository<T> : IGenericRepository<T> where T : BaseEntity, ISoftDelete
 {
     protected DataContext Context;
 
@@ -35,6 +35,18 @@ public class GenericRepository<T> : IGenericRepository<T> where T : BaseEntity
         await SaveChangesAsync();
 
         return entity;
+    }
+
+    public async Task SoftDeleteAsync(T entity)
+    {
+        T existingEntity = await Context.Set<T>().FindAsync(entity.Id);
+
+        if (existingEntity != null)
+        {
+            existingEntity.IsDeleted = true;
+
+            await SaveChangesAsync();
+        }
     }
 
     public async Task DeleteAsync(T entity)
