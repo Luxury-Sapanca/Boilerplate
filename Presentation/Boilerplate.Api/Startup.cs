@@ -1,6 +1,3 @@
-using Boilerplate.Api.Security.Authentication;
-using Microsoft.OpenApi.Models;
-
 namespace Boilerplate.Api;
 
 [ExcludeFromCodeCoverage]
@@ -16,8 +13,11 @@ public class Startup
     // This method gets called by the runtime. Use this method to add services to the container.
     public void ConfigureServices(IServiceCollection services)
     {
-        services.AddOptions<AuthenticationConfiguration>(AuthenticationConfiguration.AuthenticationScheme).Bind(Configuration.GetSection(nameof(AuthenticationConfiguration))).ValidateDataAnnotations().ValidateOnStart();
-        services.AddDbContextPool<DataContext>(options => options.UseSqlite(Configuration.GetSection("ConnectionStrings:DummyDb").Value));
+        services.AddOptions<AuthenticationConfiguration>(AuthenticationConfiguration.AuthenticationScheme)
+            .Bind(Configuration.GetSection(nameof(AuthenticationConfiguration)))
+            .ValidateDataAnnotations()
+            .ValidateOnStart();
+        services.AddDbContextPool<DataContext>(options => options.UseSqlite(Configuration.GetConnectionString("DummyDb")));
 
         services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
@@ -50,13 +50,14 @@ public class Startup
 
         });
 
-        #region Authentcation
+        #region Authentication
 
         services.AddAuthentication(x =>
         {
             x.DefaultAuthenticateScheme = AuthenticationConfiguration.AuthenticationScheme;
             x.DefaultChallengeScheme = AuthenticationConfiguration.AuthenticationScheme;
-        }).AddScheme<AuthenticationConfiguration, AuthenticationHandler>(AuthenticationConfiguration.AuthenticationScheme, _ => { });
+        })
+            .AddScheme<AuthenticationConfiguration, AuthenticationHandler>(AuthenticationConfiguration.AuthenticationScheme, _ => { });
         services.AddScoped<IAuthenticationHandler, AuthenticationHandler>();
 
         #endregion

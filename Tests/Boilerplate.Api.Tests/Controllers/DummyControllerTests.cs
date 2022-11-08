@@ -1,4 +1,7 @@
-﻿namespace Boilerplate.Api.Tests.Controllers;
+﻿using Boilerplate.Api.DTOs.Requests.Dummy;
+using Boilerplate.Api.DTOs.Responses.Dummy;
+
+namespace Boilerplate.Api.Tests.Controllers;
 
 public class DummyControllerTests
 {
@@ -32,10 +35,9 @@ public class DummyControllerTests
 
         //Act
         var result = await _sut.GetAsync();
-        var resultObject = (ObjectResult)result.Result;
 
         //Assert
-        Assert.IsType<ObjectResult>(result.Result);
+        var resultObject = Assert.IsType<ObjectResult>(result.Result);
         Assert.Equal(expected: mockGetDummiesResponse, actual: resultObject!.Value);
         _mockDummyService.VerifyAll();
     }
@@ -59,10 +61,9 @@ public class DummyControllerTests
 
         //Act
         var result = await _sut.GetAsync(1);
-        var resultObject = (ObjectResult)result.Result;
 
         //Assert
-        Assert.IsType<ObjectResult>(result.Result);
+        var resultObject = Assert.IsType<ObjectResult>(result.Result);
         Assert.Equal(expected: mockGetDummyResponse, actual: resultObject!.Value);
         _mockDummyService.VerifyAll();
     }
@@ -89,13 +90,11 @@ public class DummyControllerTests
         _mockMapper.Setup(m => m.Map<DummyDto>(mockCreateDummyRequest)).Returns(mockDummyDto);
         _mockMapper.Setup(m => m.Map<CreateDummyResponse>(mockDummyDto)).Returns(mockCreateDummyResponse);
 
-
         //Act
         var result = await _sut.PostAsync(mockCreateDummyRequest);
-        var resultObject = (ObjectResult)result.Result;
 
         //Assert
-        Assert.IsType<ObjectResult>(result.Result);
+        var resultObject = Assert.IsType<ObjectResult>(result.Result);
         Assert.Equal(expected: mockCreateDummyResponse, actual: resultObject!.Value);
         _mockDummyService.VerifyAll();
     }
@@ -125,10 +124,9 @@ public class DummyControllerTests
 
         //Act
         var result = await _sut.PutAsync(mockUpdateDummyRequest);
-        var resultObject = (ObjectResult)result.Result;
 
         //Assert
-        Assert.IsType<ObjectResult>(result.Result);
+        var resultObject = Assert.IsType<ObjectResult>(result.Result);
         Assert.Equal(expected: mockUpdateDummyResponse, actual: resultObject!.Value);
         _mockDummyService.VerifyAll();
     }

@@ -24,12 +24,11 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Scripts", "Scripts", "{97E62C57-FBB5-4513-98C7-8017ACB367FB}"
 	ProjectSection(SolutionItems) = preProject
 		Scripts\Add-Migrations.ps1 = Scripts\Add-Migrations.ps1
-		Scripts\Apply-Migrations.ps1 = Scripts\Apply-Migrations.ps1
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Boilerplate.Data.Tests", "Tests\Boilerplate.Data.Tests\Boilerplate.Data.Tests.csproj", "{E209E452-FAA9-48F5-90FC-E49EE5989A87}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Boilerplate.Domain.Tests", "Tests\Boilerplate.Domain.Tests\Boilerplate.Domain.Tests.csproj", "{CD817A00-CBD6-43B8-B8D2-8B16BD58DA09}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Boilerplate.Domain.Tests", "Tests\Boilerplate.Domain.Tests\Boilerplate.Domain.Tests.csproj", "{CD817A00-CBD6-43B8-B8D2-8B16BD58DA09}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

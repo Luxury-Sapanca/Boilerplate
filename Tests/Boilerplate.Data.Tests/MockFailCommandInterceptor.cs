@@ -2,7 +2,11 @@
 
 public class MockFailCommandInterceptor : DbCommandInterceptor
 {
-    public override ValueTask<InterceptionResult<DbDataReader>> ReaderExecutingAsync(DbCommand command, CommandEventData eventData, InterceptionResult<DbDataReader> result, CancellationToken cancellationToken = new())
+    public override ValueTask<InterceptionResult<DbDataReader>> ReaderExecutingAsync(
+        DbCommand command, 
+        CommandEventData eventData, 
+        InterceptionResult<DbDataReader> result, 
+        CancellationToken cancellationToken = new())
     {
         if (command.CommandText.StartsWith("INSERT"))
         {

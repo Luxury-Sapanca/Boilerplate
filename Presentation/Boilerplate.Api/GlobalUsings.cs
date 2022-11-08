@@ -2,8 +2,6 @@
 
 global using AutoMapper;
 global using Boilerplate.Api.Middlewares;
-global using Boilerplate.Api.Requests.Dummy;
-global using Boilerplate.Api.Responses.Dummy;
 global using Boilerplate.Api.Security.Authorization;
 global using Boilerplate.Data;
 global using Boilerplate.Data.Repository;
@@ -36,4 +34,8 @@ global using System.Net.Http.Headers;
 global using System.Security.Claims;
 global using System.Text.Encodings.Web;
 global using System.Threading.Tasks;
+global using Boilerplate.Api.DTOs.Requests.Dummy;
+global using Boilerplate.Api.DTOs.Responses.Dummy;
+global using Boilerplate.Api.Security.Authentication;
+global using Microsoft.OpenApi.Models;
 global using IConfigurationProvider = AutoMapper.IConfigurationProvider;

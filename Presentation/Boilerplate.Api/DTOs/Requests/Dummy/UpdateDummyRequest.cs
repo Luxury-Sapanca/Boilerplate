@@ -1,4 +1,4 @@
-﻿namespace Boilerplate.Api.Requests.Dummy;
+﻿namespace Boilerplate.Api.DTOs.Requests.Dummy;
 
 public class UpdateDummyRequest
 {

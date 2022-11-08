@@ -2,7 +2,11 @@
 
 public sealed class AuthenticationHandler : AuthenticationHandler<AuthenticationConfiguration>
 {
-    public AuthenticationHandler(IOptionsMonitor<AuthenticationConfiguration> options, ILoggerFactory logger, UrlEncoder encoder, ISystemClock clock) : base(options, logger, encoder, clock)
+    public AuthenticationHandler(
+        IOptionsMonitor<AuthenticationConfiguration> options, 
+        ILoggerFactory logger, 
+        UrlEncoder encoder, 
+        ISystemClock clock) : base(options, logger, encoder, clock)
     {
     }
 

@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Boilerplate.Data.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20221106101907_SoftDeleteFeature")]
-    partial class SoftDeleteFeature
+    [Migration("20221108230140_InitialMigration")]
+    partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

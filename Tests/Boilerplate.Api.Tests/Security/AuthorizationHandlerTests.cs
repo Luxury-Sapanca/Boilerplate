@@ -1,17 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection.Metadata;
-using System.Security.Claims;
-using System.Text;
-using System.Threading.Tasks;
-using Boilerplate.Api.Security.Authorization;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Authorization.Infrastructure;
-using Microsoft.Extensions.Logging;
-
-namespace Boilerplate.Api.Tests.Security;
+﻿namespace Boilerplate.Api.Tests.Security;
 
 public class AuthorizationHandlerTests
 {

@@ -4,3 +4,5 @@ while ([string]::IsNullOrWhitespace($MigrationName)) {
 }
 
 dotnet ef migrations add $MigrationName --project ../Libraries/Boilerplate.Data -s ../Presentation/Boilerplate.Api/Boilerplate.Api.csproj
+
+dotnet ef database update --project ../Libraries/Boilerplate.Data -s ../Presentation/Boilerplate.Api/Boilerplate.Api.csproj
