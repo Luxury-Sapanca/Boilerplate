@@ -37,7 +37,7 @@ public class DummyControllerTests
         var result = await _sut.GetAsync();
 
         //Assert
-        var resultObject = Assert.IsType<ObjectResult>(result.Result);
+        var resultObject = Assert.IsType<OkObjectResult>(result.Result);
         Assert.Equal(expected: mockGetDummiesResponse, actual: resultObject!.Value);
         _mockDummyService.VerifyAll();
     }
@@ -63,7 +63,7 @@ public class DummyControllerTests
         var result = await _sut.GetAsync(1);
 
         //Assert
-        var resultObject = Assert.IsType<ObjectResult>(result.Result);
+        var resultObject = Assert.IsType<OkObjectResult>(result.Result);
         Assert.Equal(expected: mockGetDummyResponse, actual: resultObject!.Value);
         _mockDummyService.VerifyAll();
     }
@@ -94,7 +94,7 @@ public class DummyControllerTests
         var result = await _sut.PostAsync(mockCreateDummyRequest);
 
         //Assert
-        var resultObject = Assert.IsType<ObjectResult>(result.Result);
+        var resultObject = Assert.IsType<CreatedResult>(result.Result);
         Assert.Equal(expected: mockCreateDummyResponse, actual: resultObject!.Value);
         _mockDummyService.VerifyAll();
     }
@@ -126,7 +126,7 @@ public class DummyControllerTests
         var result = await _sut.PutAsync(mockUpdateDummyRequest);
 
         //Assert
-        var resultObject = Assert.IsType<ObjectResult>(result.Result);
+        var resultObject = Assert.IsType<OkObjectResult>(result.Result);
         Assert.Equal(expected: mockUpdateDummyResponse, actual: resultObject!.Value);
         _mockDummyService.VerifyAll();
     }
