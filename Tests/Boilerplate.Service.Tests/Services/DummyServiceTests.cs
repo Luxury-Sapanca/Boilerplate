@@ -168,7 +168,7 @@ public class DummyServiceTests
             Name = "Test"
         };
         _mockDummyRepository.Setup(s => s.GetAsync(It.IsAny<int>())).ReturnsAsync(mockDummy);
-        _mockDummyRepository.Setup(s => s.DeleteAsync(It.IsAny<Dummy>()));
+        _mockDummyRepository.Setup(s => s.SoftDeleteAsync(It.IsAny<Dummy>()));
 
         //Act
         await _dummyService.DeleteAsync(1);

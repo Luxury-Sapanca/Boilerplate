@@ -7,6 +7,7 @@ public sealed class AuthorizationHandler : AuthorizationHandler<AuthorizationReq
         if (context.User.Identity is not {IsAuthenticated: true})
         {
             context.Fail();
+            return Task.CompletedTask;
         }
 
         context.Succeed(requirement);

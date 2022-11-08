@@ -162,6 +162,7 @@ You can find a couple of advices below in order to make the Insurance API better
 * Adding MediatR library in order to apply CQRS before the project getting bigger
 * Adding cloud features
 * Adding cancellation tokens 
+* Adding caches
 * Checking Microsoft documents for performance tips
 (https://docs.microsoft.com/en-us/dotnet/api/system.threading.cancellationtoken?view=net-6.0)
 * Adding Dockerfile

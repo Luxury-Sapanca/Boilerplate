@@ -181,6 +181,24 @@ public class GenericRepositoryTests : IDisposable
         await Assert.ThrowsAsync<DbUpdateException>(Result);
     }
 
+    [Fact]
+    public async Task GenericRepository_SoftDeleteAsync_WithGivenEntity_ShouldSoftDeleteDummy()
+    {
+        //Arrange
+        var mockDummy = new Dummy { Id = 1, Name = "TestName1" };
+        _dataContext.Dummies.Add(mockDummy);
+        await _dataContext.SaveChangesAsync();
+
+        var repository = new GenericRepository<Dummy>(_dataContext);
+
+        //Act
+        await repository.SoftDeleteAsync(mockDummy);
+        var employee = await repository.GetAsync(mockDummy.Id);
+
+        //Assert
+        Assert.Null(employee);
+    }
+
     private static DataContext CreateDataContext(DbConnection connection, params IInterceptor[]? interceptors)
     {
         var optionsBuilder = new DbContextOptionsBuilder<DataContext>().UseSqlite(connection);
